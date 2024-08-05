@@ -1,5 +1,4 @@
 import {
-  Link,
   Table,
   TableBody,
   TableCell,
@@ -8,8 +7,9 @@ import {
   TableRow,
 } from "@nextui-org/react";
 import React from "react";
-import { columns, users } from "./data";
+import { columns } from "./data";
 import { RenderCell } from "./render-cell";
+import { transactions } from '../accounts/data.json'
 
 export const TableWrapper = () => {
   return (
@@ -26,16 +26,18 @@ export const TableWrapper = () => {
             </TableColumn>
           )}
         </TableHeader>
-        <TableBody items={users}>
-          {(item) => (
-            <TableRow>
-              {(columnKey) => (
-                <TableCell>
-                  {RenderCell({ user: item, columnKey: columnKey })}
-                </TableCell>
-              )}
-            </TableRow>
-          )}
+        <TableBody items={transactions}>
+          {(item) => {
+            return (
+              <TableRow key={item.transactionId}>
+                {(columnKey) => (
+                  <TableCell>
+                    {RenderCell({ transaction: item, columnKey: columnKey })}
+                  </TableCell>
+                )}
+              </TableRow>
+            )
+          }}
         </TableBody>
       </Table>
     </div>

@@ -1,7 +1,7 @@
 "use client";
 import { Button, Input } from "@nextui-org/react";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
 import { DotsIcon } from "@/components/icons/accounts/dots-icon";
 import { ExportIcon } from "@/components/icons/accounts/export-icon";
 import { InfoIcon } from "@/components/icons/accounts/info-icon";
@@ -11,6 +11,8 @@ import { UsersIcon } from "@/components/icons/breadcrumb/users-icon";
 import { SettingsIcon } from "@/components/icons/sidebar/settings-icon";
 import { TableWrapper } from "@/components/table/table";
 import { AddUser } from "./add-user";
+import { transactions } from '../accounts/data.json'
+import { ITransaction } from './type'
 
 export const Accounts = () => {
   return (
@@ -30,11 +32,11 @@ export const Accounts = () => {
           <span> / </span>{" "}
         </li>
         <li className="flex gap-2">
-          <span>List</span>
+          <span>Transactions</span>
         </li>
       </ul>
 
-      <h3 className="text-xl font-semibold">All Accounts</h3>
+      <h3 className="text-xl font-semibold">All Transactions</h3>
       <div className="flex justify-between flex-wrap gap-4 items-center">
         <div className="flex items-center gap-3 flex-wrap md:flex-nowrap">
           <Input
@@ -42,22 +44,22 @@ export const Accounts = () => {
               input: "w-full",
               mainWrapper: "w-full",
             }}
-            placeholder="Search users"
+            placeholder="Search Transaction"
           />
           <SettingsIcon />
-          <TrashIcon />
-          <InfoIcon />
-          <DotsIcon />
+          {/* <TrashIcon /> */}
+          {/* <InfoIcon /> */}
+          {/* <DotsIcon /> */}
         </div>
         <div className="flex flex-row gap-3.5 flex-wrap">
-          <AddUser />
+          {/* <AddUser />
           <Button color="primary" startContent={<ExportIcon />}>
             Export to CSV
-          </Button>
+          </Button> */}
         </div>
       </div>
       <div className="max-w-[95rem] mx-auto w-full">
-        <TableWrapper />
+        <TableWrapper transactions={transactions} />
       </div>
     </div>
   );

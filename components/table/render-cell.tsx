@@ -1,20 +1,27 @@
-import { User, Tooltip, Chip } from "@nextui-org/react";
-import React from "react";
-import { DeleteIcon } from "../icons/table/delete-icon";
-import { EditIcon } from "../icons/table/edit-icon";
+import { User, Tooltip, Chip, Modal, ModalContent, ModalBody, ModalFooter, Button } from "@nextui-org/react";
+import React, { useState } from "react";
+// import { DeleteIcon } from "../icons/table/delete-icon";
+// import { EditIcon } from "../icons/table/edit-icon";
 import { EyeIcon } from "../icons/table/eye-icon";
-import { users } from "./data";
-
+import { transactions } from '../accounts/data.json'
 interface Props {
-  user: (typeof users)[number];
+  transaction: (typeof transactions)[number];
   columnKey: string | React.Key;
 }
 
-export const RenderCell = ({ user, columnKey }: Props) => {
+export const RenderCell = ({ transaction, columnKey }: Props) => {
   // @ts-ignore
-  const cellValue = user[columnKey];
+  const cellValue = transaction[columnKey];
+
+  const _handleViewTransactionDetail = (transaction: (typeof transactions)[number]) => {
+    console.log("View transaction", transaction)
+  }
+
+  const onClose = () => {
+  }
+
   switch (columnKey) {
-    case "name":
+    case "initiatedBy":
       return (
         <User
           avatarProps={{
@@ -22,19 +29,8 @@ export const RenderCell = ({ user, columnKey }: Props) => {
           }}
           name={cellValue}
         >
-          {user.email}
+          {transaction.initiatedBy}
         </User>
-      );
-    case "role":
-      return (
-        <div>
-          <div>
-            <span>{cellValue}</span>
-          </div>
-          <div>
-            <span>{user.team}</span>
-          </div>
-        </div>
       );
     case "status":
       return (
@@ -45,8 +41,8 @@ export const RenderCell = ({ user, columnKey }: Props) => {
             cellValue === "active"
               ? "success"
               : cellValue === "paused"
-              ? "danger"
-              : "warning"
+                ? "danger"
+                : "warning"
           }
         >
           <span className="capitalize text-xs">{cellValue}</span>
@@ -58,12 +54,12 @@ export const RenderCell = ({ user, columnKey }: Props) => {
         <div className="flex items-center gap-4 ">
           <div>
             <Tooltip content="Details">
-              <button onClick={() => console.log("View user", user.id)}>
+              <button onClick={() => _handleViewTransactionDetail(transaction)}>
                 <EyeIcon size={20} fill="#979797" />
               </button>
             </Tooltip>
           </div>
-          <div>
+          {/* <div>
             <Tooltip content="Edit user" color="secondary">
               <button onClick={() => console.log("Edit user", user.id)}>
                 <EditIcon size={20} fill="#979797" />
@@ -80,7 +76,7 @@ export const RenderCell = ({ user, columnKey }: Props) => {
                 <DeleteIcon size={20} fill="#FF0080" />
               </button>
             </Tooltip>
-          </div>
+          </div> */}
         </div>
       );
     default:

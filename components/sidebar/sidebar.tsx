@@ -34,23 +34,24 @@ export const SidebarWrapper = () => {
           collapsed: collapsed,
         })}
       >
-        <div className={Sidebar.Header()}>
+        {/* <div className={Sidebar.Header()}>
           <CompaniesDropdown />
-        </div>
+        </div> */}
         <div className="flex flex-col justify-between h-full">
           <div className={Sidebar.Body()}>
             <SidebarItem
-              title="Home"
-              icon={<HomeIcon />}
               isActive={pathname === "/"}
-              href="/"
+              title="Accounts"
+              icon={<AccountsIcon />}
+              href="accounts"
             />
+            {/* 
             <SidebarMenu title="Main Menu">
               <SidebarItem
+                title="Home"
+                icon={<HomeIcon />}
                 isActive={pathname === "/accounts"}
-                title="Accounts"
-                icon={<AccountsIcon />}
-                href="accounts"
+                href="/"
               />
               <SidebarItem
                 isActive={pathname === "/payments"}
@@ -103,7 +104,7 @@ export const SidebarWrapper = () => {
                 title="Changelog"
                 icon={<ChangeLogIcon />}
               />
-            </SidebarMenu>
+            </SidebarMenu> */}
           </div>
           <div className={Sidebar.Footer()}>
             <Tooltip content={"Settings"} color="primary">
